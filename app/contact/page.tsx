@@ -28,7 +28,7 @@ export default function ContactPage() {
               <span className="text-3xl block mb-3">💬</span>
               <h3 className="font-bold text-gray-900 mb-2">WhatsApp Order</h3>
               <p className="text-gray-600 text-sm mb-4">Send us your requirements on WhatsApp — quick response!</p>
-              <a href="https://wa.me/919124312684?text=Hello%20Rahul%20Electrical%20Works%2C%20I%20need%20help%20with%20electrical%20work."
+              <a href="https://wa.me/918895626074?text=Hello%20Rahul%20Electrical%20Works%2C%20I%20need%20help%20with%20electrical%20work."
                 target="_blank" rel="noreferrer"
                 className="inline-block bg-green-600 hover:bg-green-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-colors">
                 Open WhatsApp Chat
@@ -116,10 +116,10 @@ export default function ContactPage() {
               </div>
 
               <div className="flex gap-3">
-                <a href={`https://wa.me/919124312684?text=${encodeURIComponent("Hello Rahul Electrical Works,\n\nI need help with:\nService/Product:\n\nMy Name:\nPhone:\nAddress:\nPreferred Date:")}`}
+                <a href={`https://wa.me/918895626074?text=${encodeURIComponent("Hello Rahul Electrical Works,\n\nI need help with:\nService/Product:\n\nMy Name:\nPhone:\nAddress:\nPreferred Date:")}`}
                   target="_blank" rel="noreferrer"
                   className="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl text-center transition-colors">
-                  💬 Open on WhatsApp: 9124312684
+                  💬 Open on WhatsApp: 8895626074
                 </a>
               </div>
             </div>
@@ -142,7 +142,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="mt-4 pt-4 border-t border-gray-700">
-                <p className="text-yellow-400 text-sm font-semibold">🏭 MCL Approved Contractor • Est. 2002 • Brajrajnagar, Odisha</p>
+                <p className="text-yellow-400 text-sm font-semibold">🏭 MCL Approved Contractor • Est. 2001 • Brajrajnagar, Odisha</p>
               </div>
             </div>
           </div>
