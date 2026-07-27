@@ -9,14 +9,14 @@ export default function Footer() {
             <div className="w-10 h-10 bg-yellow-500 rounded-xl flex items-center justify-center font-black text-gray-900 text-lg">R</div>
             <div>
               <p className="font-black text-white text-sm">Rahul Electrical Works</p>
-              <p className="text-xs text-gray-500">Est. 2002</p>
+              <p className="text-xs text-gray-500">Est. 2001</p>
             </div>
           </div>
           <p className="text-sm text-gray-400 leading-relaxed mb-4">
-            Your Trusted Electrical Partner Since 2002. MCL approved contractor serving Brajrajnagar and Jharsuguda.
+            Your Trusted Electrical Partner Since 2001. MCL approved contractor serving Brajrajnagar and Jharsuguda.
           </p>
           <div className="flex gap-3">
-            <a href="https://wa.me/919124312684" target="_blank" rel="noreferrer"
+            <a href="https://wa.me/918895626074" target="_blank" rel="noreferrer"
               className="bg-green-600 hover:bg-green-500 text-white text-xs px-3 py-2 rounded-lg transition-colors">
               💬 WhatsApp
             </a>
