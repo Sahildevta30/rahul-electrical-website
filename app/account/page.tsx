@@ -46,8 +46,8 @@ function AccountContent() {
     finally { setLoading(false); }
   };
 
-  const handleSendOtp = async (e: React.FormEvent) => {
-    e.preventDefault(); setLoading(true); setError("");
+  const handleSendOtp = async () => {
+    setLoading(true); setError("");
     try { await sendOtp(phone); setAuthMode("otp"); }
     catch (err: any) { setError(err.response?.data?.message || "Failed to send OTP"); }
     finally { setLoading(false); }
@@ -85,16 +85,18 @@ function AccountContent() {
               ))}
             </div>
             {authMode === "login" ? (
-              <form onSubmit={handleLogin} className="space-y-4">
-                <div><label className="block text-sm font-medium text-gray-700 mb-1">Email</label><input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-gray-300 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" /></div>
-                <div><label className="block text-sm font-medium text-gray-700 mb-1">Password</label><input required type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full border border-gray-300 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" /></div>
-                <button type="submit" disabled={loading} className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2.5 rounded-xl disabled:opacity-60">{loading ? "Logging in..." : "Login"}</button>
-                <div className="relative text-center text-xs text-gray-400 my-2"><span className="bg-white px-2 relative z-10">or login with phone</span><div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200" /></div></div>
-                <form onSubmit={handleSendOtp} className="flex gap-2">
-                  <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone number" className="flex-1 border border-gray-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" />
-                  <button type="submit" disabled={loading || !phone} className="bg-gray-900 text-white px-4 py-2 rounded-xl text-sm font-medium disabled:opacity-40">Get OTP</button>
+              <>
+                <form onSubmit={handleLogin} className="space-y-4">
+                  <div><label className="block text-sm font-medium text-gray-700 mb-1">Email</label><input required type="email" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full border border-gray-300 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" /></div>
+                  <div><label className="block text-sm font-medium text-gray-700 mb-1">Password</label><input required type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full border border-gray-300 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" /></div>
+                  <button type="submit" disabled={loading} className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2.5 rounded-xl disabled:opacity-60">{loading ? "Logging in..." : "Login"}</button>
                 </form>
-              </form>
+                <div className="relative text-center text-xs text-gray-400 my-2"><span className="bg-white px-2 relative z-10">or login with phone</span><div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-200" /></div></div>
+                <div className="flex gap-2">
+                  <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="Phone number" className="flex-1 border border-gray-300 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+                  <button type="button" onClick={handleSendOtp} disabled={loading || !phone} className="bg-gray-900 text-white px-4 py-2 rounded-xl text-sm font-medium disabled:opacity-40">Get OTP</button>
+                </div>
+              </>
             ) : (
               <form onSubmit={handleRegister} className="space-y-4">
                 <div><label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label><input required value={name} onChange={(e) => setName(e.target.value)} className="w-full border border-gray-300 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" /></div>
