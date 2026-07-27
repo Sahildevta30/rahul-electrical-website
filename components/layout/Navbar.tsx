@@ -33,7 +33,7 @@ export default function Navbar() {
           </div>
           <div className="hidden sm:flex items-center gap-4">
             <span className="text-gray-400">📍 Brajrajnagar, Jharsuguda, Odisha</span>
-            <a href="https://wa.me/919124312684" target="_blank" rel="noreferrer"
+            <a href="https://wa.me/918895626074" target="_blank" rel="noreferrer"
               className="bg-green-600 hover:bg-green-500 px-2 py-0.5 rounded text-white transition-colors">
               💬 WhatsApp
             </a>
@@ -50,7 +50,7 @@ export default function Navbar() {
           </div>
           <div>
             <p className="font-black text-gray-900 text-sm leading-tight">Rahul Electrical</p>
-            <p className="text-xs text-gray-500 leading-tight">Works • Est. 2002</p>
+            <p className="text-xs text-gray-500 leading-tight">Works • Est. 2001</p>
           </div>
         </Link>
 
