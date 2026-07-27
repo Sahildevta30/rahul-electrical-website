@@ -2,7 +2,7 @@
 
 export default function WhatsAppFloat() {
   return (
-    
+    <a
       href="https://wa.me/918895626074?text=Hello%20Rahul%20Electrical%20Works%2C%20I%20need%20help%20with%20electrical%20services."
       target="_blank"
       rel="noreferrer"

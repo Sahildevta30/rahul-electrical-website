@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import { getProducts, getCategories } from "../lib/api";
 
 const STATS = [
-  { number: "24+", label: "Years Experience", icon: "🏆" },
+  { number: "25+", label: "Years Experience", icon: "🏆" },
   { number: "500+", label: "Happy Customers", icon: "😊" },
   { number: "MCL", label: "Approved Contractor", icon: "🏭" },
-  { number: "2002", label: "Established", icon: "📅" },
+  { number: "2001", label: "Established", icon: "📅" },
 ];
 
 const SERVICES = [
@@ -20,7 +20,7 @@ const SERVICES = [
 ];
 
 const WHY_US = [
-  { icon: "✅", title: "24 Years Experience", desc: "Serving Brajrajnagar since 2002 with trust and quality." },
+  { icon: "✅", title: "25 Years Experience", desc: "Serving Brajrajnagar since 2001 with trust and quality." },
   { icon: "🏭", title: "MCL Approved Contractor", desc: "Authorized contractor for Mahanadi Coalfields Limited." },
   { icon: "🔧", title: "Machine-Based Winding", desc: "Fan winding done by machine for precision and durability." },
   { icon: "⚡", title: "All Electrical Work", desc: "AC/DC motors, transformers, starters, HEMM spare parts." },
@@ -55,15 +55,15 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <div className="inline-flex items-center gap-2 bg-yellow-500/20 border border-yellow-500/30 rounded-full px-4 py-2 mb-6">
-                <span className="text-yellow-400 text-sm font-medium">⚡ Est. 2002 • Brajrajnagar, Odisha</span>
+                <span className="text-yellow-400 text-sm font-medium">⚡ Est. 2001 • Brajrajnagar, Odisha</span>
               </div>
               <h1 className="text-4xl md:text-5xl font-bold leading-tight mb-4">
                 Your Trusted<br />
                 <span className="text-yellow-400">Electrical Partner</span><br />
-                Since 2002
+                Since 2001
               </h1>
               <p className="text-gray-300 text-lg mb-4 leading-relaxed">
-                Rahul Electrical Works — 24 years of excellence in electrical repair, rewinding, and supply. MCL approved contractor serving Brajrajnagar and Jharsuguda.
+                Rahul Electrical Works — 25 years of excellence in electrical repair, rewinding, and supply. MCL approved contractor serving Brajrajnagar and Jharsuguda.
               </p>
               <p className="text-gray-400 text-sm mb-8">
                 AC & DC Motor • Transformer • House Wiring • Fan Rewinding • Spare Parts
@@ -75,7 +75,7 @@ export default function HomePage() {
                 <Link href="/products" className="border-2 border-yellow-500/50 hover:border-yellow-400 text-white px-6 py-3 rounded-xl transition-all hover:bg-yellow-500/10">
                   🛒 Shop Products
                 </Link>
-                <a href="https://wa.me/919124312684" target="_blank" rel="noreferrer"
+                <a href="https://wa.me/918895626074" target="_blank" rel="noreferrer"
                   className="bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl transition-all hover:scale-105">
                   💬 WhatsApp
                 </a>
@@ -120,10 +120,10 @@ export default function HomePage() {
             <div>
               <p className="text-yellow-600 font-semibold mb-2">About Us</p>
               <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                Rahul Electrical Works —<br />A Legacy of 24 Years
+                Rahul Electrical Works —<br />A Legacy of 25 Years
               </h2>
               <p className="text-gray-600 mb-4 leading-relaxed">
-                Founded in 2002 by <strong>Pradeep Kumar</strong>, Rahul Electrical Works has been serving the electrical needs of Brajrajnagar, Jharsuguda and surrounding areas for over two decades.
+                Founded in 2001 by <strong>Pradeep Kumar</strong>, Rahul Electrical Works has been serving the electrical needs of Brajrajnagar, Jharsuguda and surrounding areas for over two decades.
               </p>
               <p className="text-gray-600 mb-4 leading-relaxed">
                 We are an <strong>MCL (Mahanadi Coalfields Limited) approved contractor</strong>, handling heavy industrial electrical work alongside our retail shop. We deal in mechanical, electrical, HEMM spare parts and general order supply.
@@ -139,17 +139,19 @@ export default function HomePage() {
               {/* Founder card */}
               <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="w-16 h-16 rounded-full bg-yellow-100 flex items-center justify-center text-2xl font-bold text-yellow-700">
-                    PK
-                  </div>
+                  <img
+                    src="/images/owner-pradeep-kumar.jpg"
+                    alt="Pradeep Kumar, Founder of Rahul Electrical Works"
+                    className="w-16 h-16 rounded-full object-cover border-2 border-yellow-400"
+                  />
                   <div>
                     <h3 className="font-bold text-gray-900">Pradeep Kumar</h3>
                     <p className="text-gray-500 text-sm">Founder & Proprietor</p>
-                    <p className="text-yellow-600 text-sm font-medium">24+ Years Experience</p>
+                    <p className="text-yellow-600 text-sm font-medium">25+ Years Experience</p>
                   </div>
                 </div>
                 <p className="text-gray-600 text-sm italic">
-                  "Quality work and customer trust has been our foundation for 24 years. We believe in honest pricing and durable repairs."
+                  "Quality work and customer trust has been our foundation for over two decades. We believe in honest pricing and durable repairs."
                 </p>
               </div>
 
@@ -292,7 +294,7 @@ export default function HomePage() {
               className="bg-gray-900 hover:bg-gray-800 text-white font-bold px-8 py-3 rounded-xl transition-colors">
               📞 8895626074
             </a>
-            <a href="https://wa.me/919124312684" target="_blank" rel="noreferrer"
+            <a href="https://wa.me/918895626074" target="_blank" rel="noreferrer"
               className="bg-green-600 hover:bg-green-700 text-white font-bold px-8 py-3 rounded-xl transition-colors">
               💬 WhatsApp Order
             </a>

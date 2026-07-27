@@ -1,12 +1,13 @@
 import Link from "next/link";
 
 const TIMELINE = [
-  { year: "2002", event: "Rahul Electrical Works founded by Pradeep Kumar in Brajrajnagar, Odisha." },
-  { year: "2005", event: "Expanded services to include transformer repair and industrial electrical work." },
-  { year: "2010", event: "Became MCL (Mahanadi Coalfields Limited) approved contractor." },
+  { year: "2000", event: "Pradeep Kumar moved from Jharkhand to Brajrajnagar, Odisha and started taking up small electrical repair jobs." },
+  { year: "2001", event: "Founded Rahul Electrical Works, taking on small private tenders and building a name for honest, reliable work." },
+  { year: "Growth Years", event: "Started bidding for MCL (Mahanadi Coalfields Limited) tenders — expanding into ACB, VCB, geten box, pump motor and transformer work." },
+  { year: "MCL Partnership", event: "Became a trusted electrical contractor across MCL's Orient Colliery, Lajkura, Samleswari, Bundia and Lakhanpur areas — handling sub-areas, substations, hospitals, schools and mines." },
   { year: "2015", event: "Introduced machine-based fan rewinding for better quality and precision." },
-  { year: "2020", event: "Started dealing in HEMM spare parts and general order supply." },
-  { year: "2026", event: "Launched online presence — bringing 24 years of trust to the digital world." },
+  { year: "Today", event: "Runs a private shop in Brajrajnagar handling both MCL industrial contracts and everyday electrical work for local families and businesses." },
+  { year: "2026", event: "Launched online presence — bringing years of trust to the digital world." },
 ];
 
 const SERVICES_DETAIL = [
@@ -31,7 +32,7 @@ export default function AboutPage() {
             Rahul Electrical Works
           </h1>
           <p className="text-gray-300 text-lg">
-            Your Trusted Electrical Partner Since 2002
+            Your Trusted Electrical Partner Since 2001
           </p>
         </div>
       </section>
@@ -41,22 +42,25 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <div>
             <p className="text-yellow-600 font-semibold mb-2">Our Story</p>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">24 Years of Electrical Excellence</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">A Journey Built on Hard Work and Trust</h2>
             <div className="space-y-4 text-gray-600 leading-relaxed">
               <p>
-                Rahul Electrical Works was established in <strong>2002</strong> by <strong>Pradeep Kumar</strong> in Brajrajnagar, Jharsuguda, Odisha. What started as a small electrical repair shop has grown into a trusted name in the region for all types of electrical work.
+                Every legacy starts with a single step. For <strong>Pradeep Kumar</strong>, that step came around <strong>2000</strong>, when he left his home in Jharkhand and moved to <strong>Brajrajnagar, Jharsuguda, Odisha</strong> in search of a better future. The market was small, customers were few, and he started with whatever small electrical repair work came his way — learning the trade one job at a time.
               </p>
               <p>
-                Over 24 years, we have served <strong>500+ customers</strong> — from individual homeowners needing fan repairs to large industrial clients like <strong>Mahanadi Coalfields Limited (MCL)</strong> for whom we work as an approved contractor.
+                In <strong>2001</strong>, that hard work took shape as a firm of his own: <strong>Rahul Electrical Works</strong>. He began by taking on small private tenders, slowly earning a reputation for honest pricing and dependable repairs — the same reputation that carries the business today.
               </p>
               <p>
-                Our shop deals in <strong>AC & DC motor rewinding, transformer repair, house wiring, fan rewinding, ABC & starter repair, HEMM spare parts</strong> and general electrical goods supply. We are also authorized dealers of LED bulbs and all types of electrical goods.
+                That reputation opened the door to a much bigger opportunity. Rahul Electrical Works began bidding for and winning tenders with <strong>Mahanadi Coalfields Limited (MCL)</strong>, taking on serious industrial electrical work — <strong>ACB, VCB, geten box installations, pump motors, transformers</strong> and much more.
               </p>
               <p>
-                One of our specialties is <strong>machine-based fan rewinding</strong> — unlike manual winding, our machine ensures precise tension and uniform winding for longer life and better performance.
+                Today, that MCL work spans some of the most demanding sites in the region — sub-areas, substations, hospitals, schools and mines across <strong>Orient Colliery, Lajkura, Samleswari, Bundia and Lakhanpur</strong>. Few electrical contractors in the area can match this depth of industrial experience.
               </p>
               <p>
-                As the market moves online, we are now bringing our 24-year legacy to the digital world — so that customers from across Jharsuguda and Odisha can find us, contact us and order from us easily.
+                Alongside this industrial work, Pradeep Kumar also runs his own private shop in Brajrajnagar, where he personally handles electrical repairs and installations for local families and businesses — the same hands-on care that built the business from day one. Years of consistent, honest work have earned him the trust of a wide customer base, and his work is widely regarded as among the best and most reliable in the local market.
+              </p>
+              <p>
+                As the market moves online, we are now bringing this hard-earned legacy to the digital world — so that customers from across Jharsuguda and Odisha can find us, contact us and order from us easily.
               </p>
             </div>
           </div>
@@ -65,9 +69,11 @@ export default function AboutPage() {
           <div className="space-y-6">
             <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100">
               <div className="flex items-center gap-5 mb-5">
-                <div className="w-20 h-20 rounded-full bg-yellow-100 border-4 border-yellow-400 flex items-center justify-center text-3xl font-bold text-yellow-700">
-                  PK
-                </div>
+                <img
+                  src="/images/owner-pradeep-kumar.jpg"
+                  alt="Pradeep Kumar, Founder of Rahul Electrical Works"
+                  className="w-20 h-20 rounded-full object-cover border-4 border-yellow-400"
+                />
                 <div>
                   <h3 className="text-xl font-bold text-gray-900">Pradeep Kumar</h3>
                   <p className="text-yellow-600 font-medium">Founder & Proprietor</p>
@@ -75,10 +81,10 @@ export default function AboutPage() {
                 </div>
               </div>
               <p className="text-gray-600 text-sm leading-relaxed italic mb-4">
-                "For 24 years, our work has spoken for itself. We believe in honest pricing, quality repairs and customer satisfaction. Every motor we rewind, every wire we install — we do it like it's for our own home."
+                "I came to Odisha with nothing but a willingness to work hard. Every motor I've rewound and every wire I've installed since then has been done with one goal — to earn and keep my customers' trust, whether it's a small home repair or a major MCL contract."
               </p>
               <div className="flex flex-wrap gap-2">
-                <span className="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full font-medium">24+ Years Experience</span>
+                <span className="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full font-medium">25+ Years Experience</span>
                 <span className="bg-blue-100 text-blue-800 text-xs px-3 py-1 rounded-full font-medium">MCL Contractor</span>
                 <span className="bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full font-medium">500+ Customers</span>
               </div>
@@ -91,7 +97,7 @@ export default function AboutPage() {
                 <div>
                   <h4 className="font-bold text-gray-900 mb-1">MCL Approved Contractor</h4>
                   <p className="text-gray-600 text-sm leading-relaxed">
-                    Rahul Electrical Works is an approved contractor for <strong>Mahanadi Coalfields Limited (MCL)</strong>. We handle heavy electrical maintenance work under MCL tenders — motors, panels, starters and HEMM equipment.
+                    Rahul Electrical Works is a trusted electrical contractor for <strong>Mahanadi Coalfields Limited (MCL)</strong>, handling ACB, VCB, geten box, pump motor, transformer and other electrical work across sub-areas, substations, hospitals, schools and mines in the <strong>Orient Colliery, Lajkura, Samleswari, Bundia and Lakhanpur</strong> areas.
                   </p>
                 </div>
               </div>
@@ -122,7 +128,7 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-12">
             <p className="text-yellow-600 font-semibold mb-2">Our Journey</p>
-            <h2 className="text-3xl font-bold text-gray-900">24 Years of Growth</h2>
+            <h2 className="text-3xl font-bold text-gray-900">25 Years of Growth</h2>
           </div>
           <div className="relative">
             <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-yellow-200"></div>
@@ -168,7 +174,7 @@ export default function AboutPage() {
             <Link href="/bookings" className="bg-gray-900 text-white font-bold px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors">
               🔧 Book a Service
             </Link>
-            <a href="https://wa.me/919124312684" target="_blank" rel="noreferrer"
+            <a href="https://wa.me/918895626074" target="_blank" rel="noreferrer"
               className="bg-green-600 text-white font-bold px-6 py-3 rounded-xl hover:bg-green-700 transition-colors">
               💬 WhatsApp Us
             </a>
