@@ -4,9 +4,9 @@ import Navbar from "../components/layout/Navbar";
 import Footer from "../components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Rahul Electrical Works | Your Trusted Electrical Partner Since 2002",
+  title: "Rahul Electrical Works | Your Trusted Electrical Partner Since 2001",
   description:
-    "Rahul Electrical Works — 24 years of trusted electrical service in Brajrajnagar, Jharsuguda, Odisha. AC & DC motor rewinding, transformer repair, house wiring, fan rewinding, LED bulbs. MCL approved contractor.",
+    "Rahul Electrical Works — 25 years of trusted electrical service in Brajrajnagar, Jharsuguda, Odisha. AC & DC motor rewinding, transformer repair, house wiring, fan rewinding, LED bulbs. MCL approved contractor.",
   keywords:
     "Rahul Electrical Works, motor rewinding Brajrajnagar, transformer repair Jharsuguda, house wiring Odisha, fan rewinding, LED bulbs, MCL contractor, electrical shop Brajrajnagar",
 };
