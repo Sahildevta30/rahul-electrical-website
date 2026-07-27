@@ -6,42 +6,42 @@ const SERVICES = [
     name: "AC & DC Motor Rewinding",
     desc: "Professional rewinding for single-phase and three-phase motors of all sizes and ratings. We use high-quality copper wire and insulation materials for long-lasting performance.",
     details: ["All motor sizes and ratings", "Single & three phase", "Quality copper wire used", "Industrial & domestic motors"],
-    price: "Starting ₹500",
+    price: "Starting ₹450 (fractional HP)",
   },
   {
     icon: "🔌",
     name: "Transformer Repair",
     desc: "Expert diagnosis and repair of distribution transformers, step-up and step-down transformers. We handle both industrial and domestic transformer maintenance.",
     details: ["Distribution transformers", "Step-up & step-down", "Winding replacement", "Oil testing & refilling"],
-    price: "Starting ₹1,000",
+    price: "Starting ₹1,500",
   },
   {
     icon: "🏠",
     name: "House Wiring",
     desc: "Complete house wiring, rewiring, electrical fitting and panel installation. Safe, standard and certified work by experienced electricians.",
     details: ["New house wiring", "Rewiring old houses", "Drill panel installation", "Getan box & switch fitting"],
-    price: "Starting ₹2,000",
+    price: "Starting ₹500/point",
   },
   {
     icon: "🌀",
     name: "Fan Rewinding",
     desc: "Machine-based ceiling fan, table fan and exhaust fan rewinding. Our machine ensures precise tension and uniform winding — better than manual winding.",
     details: ["Machine-based precision winding", "Ceiling, table & exhaust fans", "Capacitor replacement", "Speed regulator repair"],
-    price: "Starting ₹200",
+    price: "Starting ₹250",
   },
   {
     icon: "💧",
     name: "Pump Installation & Repair",
     desc: "Installation, repair and maintenance of water pumps, submersible pumps and agricultural pumps. We handle both domestic and industrial pump systems.",
     details: ["Submersible pumps", "Agricultural pumps", "Motor-pump alignment", "Starter panel wiring"],
-    price: "Starting ₹800",
+    price: "Starting ₹600",
   },
   {
     icon: "⚡",
     name: "ABC & Starter Repair",
     desc: "All types of Air Break Contactor (ABC) and motor starter repair, rewinding and maintenance for industrial applications.",
     details: ["ABC rewinding", "Starter panel repair", "Contactor replacement", "Control circuit repair"],
-    price: "Starting ₹500",
+    price: "Starting ₹700",
   },
   {
     icon: "🏭",
@@ -55,7 +55,7 @@ const SERVICES = [
     name: "General Electrical Repair",
     desc: "All types of electrical repair work — coolers, geysers, stabilizers, inverters and more. If it's electrical, we can fix it.",
     details: ["Cooler & geyser repair", "Stabilizer servicing", "Inverter maintenance", "All electrical appliances"],
-    price: "Starting ₹150",
+    price: "Starting ₹200",
   },
 ];
 
@@ -66,16 +66,16 @@ export default function ServicesPage() {
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-yellow-400 font-semibold mb-3">Our Services</p>
-          <h1 className="text-4xl font-bold mb-4">Electrical Services Since 2002</h1>
+          <h1 className="text-4xl font-bold mb-4">Electrical Services Since 2001</h1>
           <p className="text-gray-300 text-lg mb-6">
-            Professional electrical repair and installation by Rahul Electrical Works — 24 years of trusted service in Brajrajnagar, Jharsuguda.
+            Professional electrical repair and installation by Rahul Electrical Works — 25 years of trusted service in Brajrajnagar, Jharsuguda.
           </p>
           <div className="flex flex-wrap gap-3 justify-center">
             <Link href="/bookings"
               className="bg-yellow-500 hover:bg-yellow-400 text-gray-900 font-bold px-6 py-3 rounded-xl transition-colors">
               🔧 Book a Service
             </Link>
-            <a href="https://wa.me/919124312684" target="_blank" rel="noreferrer"
+            <a href="https://wa.me/918895626074" target="_blank" rel="noreferrer"
               className="bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl transition-colors">
               💬 WhatsApp Us
             </a>
