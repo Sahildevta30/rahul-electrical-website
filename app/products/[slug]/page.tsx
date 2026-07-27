@@ -91,7 +91,7 @@ export default function ProductDetailPage() {
                 <button onClick={handleAddToCart} className="flex-1 bg-gray-900 hover:bg-gray-800 text-white font-bold py-3 rounded-xl transition-colors">⚡ Buy Now</button>
               </>
             )}
-            <a href={`https://wa.me/919124312684?text=${waMsg}`} target="_blank" rel="noreferrer"
+            <a href={`https://wa.me/918895626074?text=${waMsg}`} target="_blank" rel="noreferrer"
               className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl text-center transition-colors">💬 WhatsApp</a>
           </div>
           {product.brand && <p className="mt-4 text-sm text-gray-500">Brand: <span className="font-medium text-gray-700">{product.brand}</span></p>}
