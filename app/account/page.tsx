@@ -46,12 +46,20 @@ function AccountContent() {
     finally { setLoading(false); }
   };
 
+  const [resendCooldown, setResendCooldown] = useState(0);
+
   const handleSendOtp = async () => {
     setLoading(true); setError("");
-    try { await sendOtp(phone); setAuthMode("otp"); }
+    try { await sendOtp(phone); setAuthMode("otp"); setResendCooldown(30); }
     catch (err: any) { setError(err.response?.data?.message || "Failed to send OTP"); }
     finally { setLoading(false); }
   };
+
+  useEffect(() => {
+    if (resendCooldown <= 0) return;
+    const t = setTimeout(() => setResendCooldown((c) => c - 1), 1000);
+    return () => clearTimeout(t);
+  }, [resendCooldown]);
 
   const handleVerifyOtp = async (e: React.FormEvent) => {
     e.preventDefault(); setLoading(true); setError("");
@@ -75,6 +83,9 @@ function AccountContent() {
             <div><label className="block text-sm font-medium text-gray-700 mb-1">Your Name</label><input value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter your name" className="w-full border border-gray-300 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" /></div>
             <div><label className="block text-sm font-medium text-gray-700 mb-1">Enter OTP</label><input required value={otp} onChange={(e) => setOtp(e.target.value)} placeholder="6-digit OTP" className="w-full border border-gray-300 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500 text-center tracking-widest text-lg" /></div>
             <button type="submit" disabled={loading} className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2.5 rounded-xl disabled:opacity-60">{loading ? "Verifying..." : "Verify OTP"}</button>
+            <button type="button" onClick={handleSendOtp} disabled={loading || resendCooldown > 0} className="w-full text-sm text-gray-500 hover:text-gray-700 disabled:opacity-40">
+              {resendCooldown > 0 ? `Resend OTP in ${resendCooldown}s` : "Didn't receive it? Resend OTP"}
+            </button>
             <button type="button" onClick={() => setAuthMode("login")} className="w-full text-sm text-gray-500 hover:text-gray-700">← Back</button>
           </form>
         ) : (
