@@ -39,6 +39,9 @@ export const getOrder = (id: string) => api.get(`/orders/${id}`);
 export const createBooking = (data: object) => api.post("/bookings", data);
 export const getMyBookings = () => api.get("/bookings/my");
 export const createReview = (data: object) => api.post("/reviews", data);
+export const submitGeneralReview = (data: { name: string; rating: number; comment?: string }) =>
+  api.post("/reviews/general", data);
+export const getPublicReviews = () => api.get("/reviews/public");
 export const getAddresses = () => api.get("/customers/addresses");
 export const addAddress = (data: object) => api.post("/customers/addresses", data);
 export const deleteAddress = (id: string) => api.delete(`/customers/addresses/${id}`);

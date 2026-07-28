@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getProducts, getCategories } from "../lib/api";
+import { getProducts, getCategories, getPublicReviews, submitGeneralReview } from "../lib/api";
 
 const STATS = [
   { number: "25+", label: "Years Experience", icon: "🏆" },
@@ -28,20 +28,39 @@ const WHY_US = [
   { icon: "💰", title: "Affordable Pricing", desc: "Quality work at fair prices with no hidden charges." },
 ];
 
-const TESTIMONIALS = [
-  { name: "Rajesh Kumar", location: "Brajrajnagar", text: "Bahut achha kaam karte hain. Motor rewinding perfectly done. 10 saal se yahan aa raha hun.", rating: 5 },
-  { name: "Suresh Mahanta", location: "Jharsuguda", text: "Very reliable shop. Fan winding machine se hoti hai toh quality bahut achhi rehti hai.", rating: 5 },
-  { name: "MCL Contractor", location: "Orient Colliery", text: "Professional service for industrial electrical work. Always on time and quality assured.", rating: 5 },
-];
-
 export default function HomePage() {
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
+  const [reviews, setReviews] = useState<any[]>([]);
+  const [reviewName, setReviewName] = useState("");
+  const [reviewRating, setReviewRating] = useState(5);
+  const [reviewComment, setReviewComment] = useState("");
+  const [reviewSubmitting, setReviewSubmitting] = useState(false);
+  const [reviewMsg, setReviewMsg] = useState("");
+
+  const loadReviews = () => getPublicReviews().then((r) => setReviews(r.data)).catch(() => {});
 
   useEffect(() => {
     getProducts({ limit: 6 }).then((r) => setProducts(r.data.products)).catch(() => {});
     getCategories().then((r) => setCategories(r.data)).catch(() => {});
+    loadReviews();
   }, []);
+
+  const handleReviewSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!reviewName.trim()) return;
+    setReviewSubmitting(true);
+    setReviewMsg("");
+    try {
+      await submitGeneralReview({ name: reviewName.trim(), rating: reviewRating, comment: reviewComment.trim() || undefined });
+      setReviewMsg("Thank you! Your review has been submitted and will appear here after approval.");
+      setReviewName(""); setReviewComment(""); setReviewRating(5);
+    } catch {
+      setReviewMsg("Something went wrong. Please try again.");
+    } finally {
+      setReviewSubmitting(false);
+    }
+  };
 
   return (
     <>
@@ -255,27 +274,58 @@ export default function HomePage() {
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section className="bg-yellow-50 py-16">
+      <section id="reviews" className="bg-yellow-50 py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <p className="text-yellow-600 font-semibold mb-2">Customer Reviews</p>
             <h2 className="text-3xl font-bold text-gray-900">What Our Customers Say</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {TESTIMONIALS.map((t) => (
-              <div key={t.name} className="bg-white rounded-2xl p-6 shadow-sm border border-yellow-100">
-                <div className="flex mb-4">
-                  {[...Array(t.rating)].map((_, i) => (
-                    <span key={i} className="text-yellow-400 text-lg">★</span>
+
+          {reviews.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+              {reviews.map((r) => (
+                <div key={r.id} className="bg-white rounded-2xl p-6 shadow-sm border border-yellow-100">
+                  <div className="flex mb-4">
+                    {[...Array(r.rating)].map((_, i) => (
+                      <span key={i} className="text-yellow-400 text-lg">★</span>
+                    ))}
+                    {[...Array(5 - r.rating)].map((_, i) => (
+                      <span key={i} className="text-gray-200 text-lg">★</span>
+                    ))}
+                  </div>
+                  {r.comment && <p className="text-gray-600 text-sm leading-relaxed mb-4 italic">"{r.comment}"</p>}
+                  <p className="font-bold text-gray-900">{r.display_name}</p>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p className="text-center text-gray-500 mb-12">Be the first to share your experience with us!</p>
+          )}
+
+          {/* Write a review */}
+          <div className="max-w-lg mx-auto bg-white rounded-2xl p-6 shadow-sm border border-yellow-100">
+            <h3 className="font-bold text-gray-900 mb-4 text-center">⭐ Rate Your Experience</h3>
+            {reviewMsg ? (
+              <p className="text-center text-green-700 bg-green-50 rounded-xl py-3 px-4 text-sm">{reviewMsg}</p>
+            ) : (
+              <form onSubmit={handleReviewSubmit} className="space-y-4">
+                <input required value={reviewName} onChange={(e) => setReviewName(e.target.value)}
+                  placeholder="Your name" className="w-full border border-gray-300 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+                <div className="flex justify-center gap-2">
+                  {[1, 2, 3, 4, 5].map((n) => (
+                    <button key={n} type="button" onClick={() => setReviewRating(n)}
+                      className={`text-3xl transition-transform hover:scale-110 ${n <= reviewRating ? "text-yellow-400" : "text-gray-200"}`}>★</button>
                   ))}
                 </div>
-                <p className="text-gray-600 text-sm leading-relaxed mb-4 italic">"{t.text}"</p>
-                <div>
-                  <p className="font-bold text-gray-900">{t.name}</p>
-                  <p className="text-gray-400 text-xs">{t.location}</p>
-                </div>
-              </div>
-            ))}
+                <textarea rows={3} value={reviewComment} onChange={(e) => setReviewComment(e.target.value)}
+                  placeholder="Tell us about your experience (optional)"
+                  className="w-full border border-gray-300 rounded-xl px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" />
+                <button type="submit" disabled={reviewSubmitting}
+                  className="w-full bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-2.5 rounded-xl disabled:opacity-60">
+                  {reviewSubmitting ? "Submitting..." : "Submit Review"}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>
