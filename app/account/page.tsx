@@ -148,6 +148,7 @@ function AccountContent() {
                 <div className="text-right"><span className={`px-3 py-1 rounded-full text-xs font-semibold capitalize ${STATUS_COLOR[o.order_status] || "bg-gray-100"}`}>{o.order_status}</span><p className="font-bold text-gray-900 mt-1">₹{o.total_amount}</p></div>
               </div>
               <p className="text-xs text-gray-400">Payment: {o.payment_method?.toUpperCase()} · {o.payment_status}</p>
+              {o.tracking_note && <p className="text-xs text-blue-700 bg-blue-50 rounded-lg px-3 py-2 mt-3">🚚 {o.tracking_note}</p>}
             </div>
           ))}
         </div>
@@ -162,7 +163,7 @@ function AccountContent() {
                 <div><p className="font-semibold text-gray-900">{b.service_type}</p><p className="text-sm text-gray-500 mt-0.5">{b.address}</p></div>
                 <span className={`px-3 py-1 rounded-full text-xs font-semibold capitalize ${STATUS_COLOR[b.status] || "bg-gray-100"}`}>{b.status.replace("_"," ")}</span>
               </div>
-              {b.admin_notes && <p className="text-xs text-blue-700 bg-blue-50 rounded-lg px-3 py-2 mt-3">📌 {b.admin_notes}</p>}
+              {b.admin_notes && <p className="text-xs text-blue-700 bg-blue-50 rounded-lg px-3 py-2 mt-3">🔧 {b.admin_notes}</p>}
             </div>
           ))}
         </div>
