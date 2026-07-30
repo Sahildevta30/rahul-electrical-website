@@ -45,3 +45,6 @@ export const getPublicReviews = () => api.get("/reviews/public");
 export const getAddresses = () => api.get("/customers/addresses");
 export const addAddress = (data: object) => api.post("/customers/addresses", data);
 export const deleteAddress = (id: string) => api.delete(`/customers/addresses/${id}`);
+export const getWishlist = () => api.get("/wishlist");
+export const addToWishlist = (product_id: string) => api.post("/wishlist", { product_id });
+export const removeFromWishlist = (productId: string) => api.delete(`/wishlist/${productId}`);

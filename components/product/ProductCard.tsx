@@ -1,6 +1,9 @@
 "use client";
 import Link from "next/link";
+import { useEffect } from "react";
 import { useCartStore } from "../../lib/cartStore";
+import { useWishlistStore } from "../../lib/wishlistStore";
+import { useAuthStore } from "../../lib/authStore";
 
 interface Product {
   id: string; name: string; slug: string; price: number;
@@ -10,9 +13,33 @@ interface Product {
 
 export default function ProductCard({ product }: { product: Product }) {
   const { addItem } = useCartStore();
+  const { has, toggle, load, loaded } = useWishlistStore();
+  const { isLoggedIn } = useAuthStore();
+
+  useEffect(() => {
+    if (isLoggedIn() && !loaded) load();
+  }, [isLoggedIn, loaded, load]);
+
+  const handleWishlist = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!isLoggedIn()) {
+      window.location.href = "/account";
+      return;
+    }
+    toggle(product.id);
+  };
+
+  const inWishlist = has(product.id);
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow group">
+    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-md transition-shadow group relative">
+      <button
+        onClick={handleWishlist}
+        aria-label={inWishlist ? "Remove from wishlist" : "Add to wishlist"}
+        className="absolute top-2 right-2 z-10 w-8 h-8 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow-sm hover:scale-110 transition-transform"
+      >
+        <span className={inWishlist ? "text-red-500" : "text-gray-300"}>{inWishlist ? "♥" : "♡"}</span>
+      </button>
       <Link href={`/products/${product.slug}`}>
         <div className="aspect-square bg-gray-50 overflow-hidden">
           {product.image_url ? (

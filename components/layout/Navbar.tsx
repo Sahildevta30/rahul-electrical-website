@@ -2,16 +2,25 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCartStore } from "../../lib/cartStore";
+import { useWishlistStore } from "../../lib/wishlistStore";
 import { useAuthStore } from "../../lib/authStore";
 import { useLangStore } from "../../lib/langStore";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const { count } = useCartStore();
-  const { user, logout } = useAuthStore();
+  const { count: wishlistCount, load: loadWishlist, loaded: wishlistLoaded, reset: resetWishlist } = useWishlistStore();
+  const { user, logout, isLoggedIn } = useAuthStore();
   const { lang, setLang } = useLangStore();
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+
+  useEffect(() => {
+    if (isLoggedIn() && !wishlistLoaded) loadWishlist();
+    if (!isLoggedIn() && wishlistLoaded) resetWishlist();
+  }, [isLoggedIn, wishlistLoaded, loadWishlist, resetWishlist]);
+
+  const handleLogout = () => { logout(); resetWishlist(); };
 
   const nav = [
     { label: "Home", href: "/" },
@@ -75,6 +84,15 @@ export default function Navbar() {
             {lang === "en" ? "हिं" : "EN"}
           </button>
 
+          <Link href="/wishlist" className="relative p-2">
+            <span className="text-xl">♡</span>
+            {wishlistCount() > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
+                {wishlistCount()}
+              </span>
+            )}
+          </Link>
+
           <Link href="/cart" className="relative p-2">
             <span className="text-xl">🛒</span>
             {count() > 0 && (
@@ -92,7 +110,7 @@ export default function Navbar() {
               <div className="absolute right-0 top-8 bg-white border border-gray-200 rounded-xl shadow-lg py-2 w-44 hidden group-hover:block">
                 <Link href="/account" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">My Orders</Link>
                 <Link href="/account?tab=bookings" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">My Bookings</Link>
-                <button onClick={logout} className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-50">Logout</button>
+                <button onClick={handleLogout} className="block w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-50">Logout</button>
               </div>
             </div>
           ) : (

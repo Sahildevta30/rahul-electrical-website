@@ -4,12 +4,14 @@ import { useParams, useRouter } from "next/navigation";
 import { getProduct, createReview } from "../../../lib/api";
 import { useCartStore } from "../../../lib/cartStore";
 import { useAuthStore } from "../../../lib/authStore";
+import { useWishlistStore } from "../../../lib/wishlistStore";
 
 export default function ProductDetailPage() {
   const { slug } = useParams();
   const router = useRouter();
   const { addItem } = useCartStore();
-  const { user } = useAuthStore();
+  const { user, isLoggedIn } = useAuthStore();
+  const { has, toggle, load, loaded } = useWishlistStore();
   const [product, setProduct] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [qty, setQty] = useState(1);
@@ -17,6 +19,10 @@ export default function ProductDetailPage() {
   const [comment, setComment] = useState("");
   const [submittingReview, setSubmittingReview] = useState(false);
   const [reviewMsg, setReviewMsg] = useState("");
+
+  useEffect(() => {
+    if (isLoggedIn() && !loaded) load();
+  }, [isLoggedIn, loaded, load]);
 
   useEffect(() => {
     if (!slug) return;
@@ -93,6 +99,12 @@ export default function ProductDetailPage() {
             )}
             <a href={`https://wa.me/918895626074?text=${waMsg}`} target="_blank" rel="noreferrer"
               className="flex-1 bg-green-500 hover:bg-green-600 text-white font-bold py-3 rounded-xl text-center transition-colors">💬 WhatsApp</a>
+            <button
+              onClick={() => { if (!isLoggedIn()) { router.push("/account"); return; } toggle(product.id); }}
+              aria-label={has(product.id) ? "Remove from wishlist" : "Add to wishlist"}
+              className="w-14 h-14 sm:w-auto sm:px-5 shrink-0 border border-gray-300 rounded-xl flex items-center justify-center hover:border-red-300 transition-colors">
+              <span className={has(product.id) ? "text-red-500 text-xl" : "text-gray-400 text-xl"}>{has(product.id) ? "♥" : "♡"}</span>
+            </button>
           </div>
           {product.brand && <p className="mt-4 text-sm text-gray-500">Brand: <span className="font-medium text-gray-700">{product.brand}</span></p>}
         </div>
