@@ -35,6 +35,8 @@ export default function Footer() {
             <Link href="/services" className="block text-gray-400 hover:text-yellow-400 transition-colors">Services</Link>
             <Link href="/products" className="block text-gray-400 hover:text-yellow-400 transition-colors">Products</Link>
             <Link href="/bookings" className="block text-gray-400 hover:text-yellow-400 transition-colors">Book Service</Link>
+            <Link href="/gallery" className="block text-gray-400 hover:text-yellow-400 transition-colors">Gallery</Link>
+            <Link href="/faq" className="block text-gray-400 hover:text-yellow-400 transition-colors">FAQ</Link>
             <Link href="/contact" className="block text-gray-400 hover:text-yellow-400 transition-colors">Contact</Link>
           </div>
         </div>
