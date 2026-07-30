@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getProducts, getCategories, getPublicReviews, submitGeneralReview } from "../lib/api";
+import Reveal from "../components/ui/Reveal";
 
 const STATS = [
   { number: "25+", label: "Years Experience", icon: "🏆" },
@@ -67,8 +68,8 @@ export default function HomePage() {
       {/* ── HERO ── */}
       <section className="relative bg-gradient-to-br from-gray-950 via-gray-900 to-yellow-950 text-white overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-20 left-10 w-72 h-72 bg-yellow-500 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-20 right-10 w-96 h-96 bg-yellow-600 rounded-full blur-3xl"></div>
+          <div className="absolute top-20 left-10 w-72 h-72 bg-yellow-500 rounded-full blur-3xl animate-blob"></div>
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-yellow-600 rounded-full blur-3xl animate-blob-delay"></div>
         </div>
         <div className="relative max-w-6xl mx-auto px-4 py-20 md:py-28">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -134,7 +135,7 @@ export default function HomePage() {
 
       {/* ── ABOUT PREVIEW ── */}
       <section className="bg-white py-16">
-        <div className="max-w-6xl mx-auto px-4">
+        <Reveal className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
               <p className="text-yellow-600 font-semibold mb-2">About Us</p>
@@ -194,12 +195,12 @@ export default function HomePage() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* ── SERVICES ── */}
       <section className="bg-gray-50 py-16">
-        <div className="max-w-6xl mx-auto px-4">
+        <Reveal className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <p className="text-yellow-600 font-semibold mb-2">What We Do</p>
             <h2 className="text-3xl font-bold text-gray-900">Our Services</h2>
@@ -222,7 +223,7 @@ export default function HomePage() {
               View All Services
             </Link>
           </div>
-        </div>
+        </Reveal>
       </section>
 
       {/* ── PRODUCTS ── */}

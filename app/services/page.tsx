@@ -1,4 +1,5 @@
 import Link from "next/link";
+import ServicesGrid from "../../components/services/ServicesGrid";
 
 const SERVICES = [
   {
@@ -87,8 +88,10 @@ export default async function ServicesPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16 px-4">
+        <div className="absolute -top-20 -left-20 w-72 h-72 bg-yellow-500/20 rounded-full blur-3xl animate-blob" />
+        <div className="absolute top-10 right-0 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-blob-delay" />
+        <div className="relative max-w-4xl mx-auto text-center">
           <p className="text-yellow-400 font-semibold mb-3">Our Services</p>
           <h1 className="text-4xl font-bold mb-4">Electrical Services Since 2001</h1>
           <p className="text-gray-300 text-lg mb-6">
@@ -118,31 +121,7 @@ export default async function ServicesPage() {
 
       {/* Services Grid */}
       <section className="max-w-6xl mx-auto px-4 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {services.map((s) => (
-            <div key={s.name} className="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-yellow-200 transition-all">
-              <div className="flex items-start gap-4 mb-4">
-                <span className="text-4xl">{s.icon}</span>
-                <div className="flex-1">
-                  <h2 className="text-lg font-bold text-gray-900 mb-1">{s.name}</h2>
-                  <span className="text-yellow-600 text-sm font-semibold">{s.price}</span>
-                </div>
-              </div>
-              <p className="text-gray-600 text-sm leading-relaxed mb-4">{s.desc}</p>
-              <ul className="space-y-1 mb-5">
-                {s.details.map((d) => (
-                  <li key={d} className="flex items-center gap-2 text-gray-500 text-sm">
-                    <span className="text-yellow-500 text-xs">✓</span> {d}
-                  </li>
-                ))}
-              </ul>
-              <Link href={`/bookings?service=${encodeURIComponent(s.name)}`}
-                className="inline-block bg-yellow-500 hover:bg-yellow-600 text-gray-900 font-bold text-sm px-5 py-2.5 rounded-xl transition-colors">
-                Book This Service
-              </Link>
-            </div>
-          ))}
-        </div>
+        <ServicesGrid services={services} />
       </section>
 
       {/* Special highlight */}
