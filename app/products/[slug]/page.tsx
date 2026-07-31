@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { getProduct, createReview } from "../../../lib/api";
+import { getProduct, createReview, getProducts } from "../../../lib/api";
 import { useCartStore } from "../../../lib/cartStore";
 import { useAuthStore } from "../../../lib/authStore";
 import { useWishlistStore } from "../../../lib/wishlistStore";
+import { getRecentlyViewed, addRecentlyViewed, RecentProduct } from "../../../lib/recentlyViewed";
+import ProductCard from "../../../components/product/ProductCard";
 
 export default function ProductDetailPage() {
   const { slug } = useParams();
@@ -19,6 +21,8 @@ export default function ProductDetailPage() {
   const [comment, setComment] = useState("");
   const [submittingReview, setSubmittingReview] = useState(false);
   const [reviewMsg, setReviewMsg] = useState("");
+  const [related, setRelated] = useState<any[]>([]);
+  const [recent, setRecent] = useState<RecentProduct[]>([]);
 
   useEffect(() => {
     if (isLoggedIn() && !loaded) load();
@@ -26,7 +30,17 @@ export default function ProductDetailPage() {
 
   useEffect(() => {
     if (!slug) return;
-    getProduct(slug as string).then((r) => setProduct(r.data)).catch(console.error).finally(() => setLoading(false));
+    getProduct(slug as string).then((r) => {
+      const p = r.data;
+      setProduct(p);
+      addRecentlyViewed({ id: p.id, name: p.name, slug: p.slug, price: p.price, image_url: p.image_url, stock: p.stock });
+      setRecent(getRecentlyViewed(p.id));
+      if (p.category_slug) {
+        getProducts({ category: p.category_slug, limit: 5 })
+          .then((res) => setRelated(res.data.products.filter((x: any) => x.id !== p.id).slice(0, 4)))
+          .catch(() => {});
+      }
+    }).catch(console.error).finally(() => setLoading(false));
   }, [slug]);
 
   if (loading) return <div className="max-w-4xl mx-auto px-4 py-16 text-center text-gray-400">Loading...</div>;
@@ -153,6 +167,24 @@ export default function ProductDetailPage() {
           </form>
         </div>
       </div>
+
+      {related.length > 0 && (
+        <div className="mt-16">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Related Products</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {related.map((p: any) => <ProductCard key={p.id} product={p} />)}
+          </div>
+        </div>
+      )}
+
+      {recent.length > 0 && (
+        <div className="mt-16">
+          <h2 className="text-xl font-bold text-gray-900 mb-4">Recently Viewed</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {recent.map((p) => <ProductCard key={p.id} product={p} />)}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getProducts, getCategories, getPublicReviews, submitGeneralReview } from "../lib/api";
 import Reveal from "../components/ui/Reveal";
+import ProductCard from "../components/product/ProductCard";
+import { getRecentlyViewed, RecentProduct } from "../lib/recentlyViewed";
 
 const STATS = [
   { number: "25+", label: "Years Experience", icon: "🏆" },
@@ -33,6 +35,7 @@ export default function HomePage() {
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
   const [reviews, setReviews] = useState<any[]>([]);
+  const [recentlyViewed, setRecentlyViewed] = useState<RecentProduct[]>([]);
   const [reviewName, setReviewName] = useState("");
   const [reviewRating, setReviewRating] = useState(5);
   const [reviewComment, setReviewComment] = useState("");
@@ -45,6 +48,7 @@ export default function HomePage() {
     getProducts({ limit: 6 }).then((r) => setProducts(r.data.products)).catch(() => {});
     getCategories().then((r) => setCategories(r.data)).catch(() => {});
     loadReviews();
+    setRecentlyViewed(getRecentlyViewed());
   }, []);
 
   const handleReviewSubmit = async (e: React.FormEvent) => {
@@ -252,6 +256,21 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
+        </section>
+      )}
+
+      {/* ── RECENTLY VIEWED ── */}
+      {recentlyViewed.length > 0 && (
+        <section className="bg-gray-50 py-16">
+          <Reveal className="max-w-6xl mx-auto px-4">
+            <div className="mb-8">
+              <p className="text-yellow-600 font-semibold mb-1">Pick Up Where You Left Off</p>
+              <h2 className="text-3xl font-bold text-gray-900">Recently Viewed</h2>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+              {recentlyViewed.map((p) => <ProductCard key={p.id} product={p} />)}
+            </div>
+          </Reveal>
         </section>
       )}
 
