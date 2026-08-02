@@ -5,14 +5,17 @@ import Link from "next/link";
 import { useCartStore } from "../../lib/cartStore";
 import { useAuthStore } from "../../lib/authStore";
 import { createOrder } from "../../lib/api";
+import LocalitySelect from "../components/ui/LocalitySelect";
 
 export default function CheckoutPage() {
   const router = useRouter();
   const { items, total, clearCart } = useCartStore();
   const { user } = useAuthStore();
-  const [form, setForm] = useState({ name: user?.name || "", phone: user?.phone || "", address: "", city: "", pincode: "", payment_method: "cod" });
+  const [form, setForm] = useState({ name: user?.name || "", phone: user?.phone || "", address: "", city: "", state: "", pincode: "", payment_method: "cod" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [cityOptions, setCityOptions] = useState<string[]>([]);
+  const [pincodeStatus, setPincodeStatus] = useState<"idle" | "loading" | "found" | "not_found">("idle");
 
   if (!user) return (
     <div className="max-w-md mx-auto px-4 py-20 text-center">
@@ -32,11 +35,49 @@ export default function CheckoutPage() {
 
   const set = (k: string, v: string) => setForm((f) => ({ ...f, [k]: v }));
 
+  const lookupPincode = async (pincode: string) => {
+    setPincodeStatus("loading");
+    try {
+      const res = await fetch(`https://api.postalpincode.in/pincode/${pincode}`);
+      const data = await res.json();
+      const result = data?.[0];
+      if (result?.Status === "Success" && result.PostOffice?.length) {
+        const localities: string[] = Array.from(
+          new Set(result.PostOffice.map((po: any) => po.Name as string))
+        );
+        setCityOptions(localities);
+        setForm((f) => ({
+          ...f,
+          city: f.city || localities[0],
+          state: result.PostOffice[0].State || f.state,
+        }));
+        setPincodeStatus("found");
+      } else {
+        setCityOptions([]);
+        setPincodeStatus("not_found");
+      }
+    } catch {
+      setCityOptions([]);
+      setPincodeStatus("not_found");
+    }
+  };
+
+  const handlePincodeChange = (v: string) => {
+    const digits = v.replace(/\D/g, "").slice(0, 6);
+    set("pincode", digits);
+    if (digits.length === 6) {
+      lookupPincode(digits);
+    } else {
+      setPincodeStatus("idle");
+      setCityOptions([]);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true); setError("");
     try {
-      await createOrder({ items: items.map((i) => ({ product_id: i.id, quantity: i.quantity })), payment_method: form.payment_method, shipping_name: form.name, shipping_phone: form.phone, shipping_address: form.address, shipping_city: form.city, shipping_pincode: form.pincode });
+      await createOrder({ items: items.map((i) => ({ product_id: i.id, quantity: i.quantity })), payment_method: form.payment_method, shipping_name: form.name, shipping_phone: form.phone, shipping_address: form.address, shipping_city: form.city, shipping_state: form.state, shipping_pincode: form.pincode });
       clearCart();
       router.push("/account?tab=orders&success=1");
     } catch (err: any) {
@@ -56,8 +97,33 @@ export default function CheckoutPage() {
               <div><label className="block text-sm font-medium text-gray-700 mb-1">Full Name *</label><input required value={form.name} onChange={(e) => set("name", e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" /></div>
               <div><label className="block text-sm font-medium text-gray-700 mb-1">Phone *</label><input required value={form.phone} onChange={(e) => set("phone", e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" /></div>
               <div className="col-span-2"><label className="block text-sm font-medium text-gray-700 mb-1">Address *</label><textarea required rows={2} value={form.address} onChange={(e) => set("address", e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" /></div>
-              <div><label className="block text-sm font-medium text-gray-700 mb-1">City</label><input value={form.city} onChange={(e) => set("city", e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" /></div>
-              <div><label className="block text-sm font-medium text-gray-700 mb-1">PIN Code</label><input value={form.pincode} onChange={(e) => set("pincode", e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" /></div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">PIN Code</label>
+                <input
+                  inputMode="numeric"
+                  value={form.pincode}
+                  onChange={(e) => handlePincodeChange(e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                  placeholder="6-digit PIN"
+                />
+                {pincodeStatus === "loading" && <p className="text-xs text-gray-400 mt-1">Looking up area…</p>}
+                {pincodeStatus === "not_found" && form.pincode.length === 6 && (
+                  <p className="text-xs text-amber-600 mt-1">Couldn't auto-detect — please fill City/State manually.</p>
+                )}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">City / Area</label>
+                <LocalitySelect
+                  value={form.city}
+                  onChange={(v) => set("city", v)}
+                  options={cityOptions}
+                  placeholder="Search or type your area"
+                />
+              </div>
+              <div className="col-span-2 sm:col-span-1">
+                <label className="block text-sm font-medium text-gray-700 mb-1">State</label>
+                <input value={form.state} onChange={(e) => set("state", e.target.value)} className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-yellow-500" placeholder="Auto-filled from PIN code" />
+              </div>
             </div>
           </div>
           <div className="bg-white rounded-xl shadow-sm p-6">
