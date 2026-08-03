@@ -1,6 +1,6 @@
 export default function ContactPage() {
   return (
-    <div>
+    <div className="surface-circuit">
       {/* Hero */}
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">

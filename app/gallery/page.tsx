@@ -23,7 +23,7 @@ export default function GalleryPage() {
   }, [selected]);
 
   return (
-    <div>
+    <div className="surface-circuit">
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16 px-4">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-yellow-400 font-semibold mb-3">Our Work</p>

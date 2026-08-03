@@ -138,7 +138,7 @@ export default function HomePage() {
       </section>
 
       {/* ── ABOUT PREVIEW ── */}
-      <section className="bg-white py-16">
+      <section className="surface-circuit py-16">
         <Reveal className="max-w-6xl mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
@@ -203,7 +203,7 @@ export default function HomePage() {
       </section>
 
       {/* ── SERVICES ── */}
-      <section className="bg-gray-50 py-16">
+      <section className="surface-circuit-soft py-16">
         <Reveal className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <p className="text-yellow-600 font-semibold mb-2">What We Do</p>
@@ -232,7 +232,7 @@ export default function HomePage() {
 
       {/* ── PRODUCTS ── */}
       {products.length > 0 && (
-        <section className="bg-white py-16">
+        <section className="surface-circuit py-16">
           <div className="max-w-6xl mx-auto px-4">
             <div className="flex items-center justify-between mb-8">
               <div>
@@ -261,7 +261,7 @@ export default function HomePage() {
 
       {/* ── RECENTLY VIEWED ── */}
       {recentlyViewed.length > 0 && (
-        <section className="bg-gray-50 py-16">
+        <section className="surface-circuit-soft py-16">
           <Reveal className="max-w-6xl mx-auto px-4">
             <div className="mb-8">
               <p className="text-yellow-600 font-semibold mb-1">Pick Up Where You Left Off</p>
@@ -275,7 +275,7 @@ export default function HomePage() {
       )}
 
       {/* ── WHY CHOOSE US ── */}
-      <section className="bg-gray-900 text-white py-16">
+      <section className="surface-circuit-dark text-white py-16">
         <div className="max-w-6xl mx-auto px-4">
           <div className="text-center mb-12">
             <p className="text-yellow-400 font-semibold mb-2">Why Choose Us</p>

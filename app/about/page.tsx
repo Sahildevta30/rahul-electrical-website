@@ -23,7 +23,7 @@ const SERVICES_DETAIL = [
 
 export default function AboutPage() {
   return (
-    <div className="bg-white">
+    <div className="surface-circuit">
       {/* Hero */}
       <section className="bg-gradient-to-br from-gray-900 to-gray-800 text-white py-20 px-4">
         <div className="max-w-4xl mx-auto text-center">
@@ -124,7 +124,7 @@ export default function AboutPage() {
       </section>
 
       {/* Timeline */}
-      <section className="bg-gray-50 py-16">
+      <section className="surface-circuit-soft py-16">
         <div className="max-w-4xl mx-auto px-4">
           <div className="text-center mb-12">
             <p className="text-yellow-600 font-semibold mb-2">Our Journey</p>

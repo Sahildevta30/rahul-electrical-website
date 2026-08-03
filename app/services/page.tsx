@@ -86,7 +86,7 @@ export default async function ServicesPage() {
     price: liveSettings[s.key] || s.price,
   }));
   return (
-    <div>
+    <div className="surface-circuit">
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 to-gray-800 text-white py-16 px-4">
         <div className="absolute -top-20 -left-20 w-72 h-72 bg-yellow-500/20 rounded-full blur-3xl animate-blob" />
@@ -144,7 +144,7 @@ export default async function ServicesPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-gray-900 text-white py-14 px-4">
+      <section className="surface-circuit-dark text-white py-14 px-4">
         <div className="max-w-2xl mx-auto text-center">
           <h2 className="text-2xl font-bold mb-2">Need a Service?</h2>
           <p className="text-gray-400 mb-6">Book online or call us directly — we serve Brajrajnagar, Jharsuguda and surrounding areas.</p>
